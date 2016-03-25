@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<form action="ViewUsersPosts.php" method="post">
+	<select name="select">
+	<tr>
+		<td id='postid'> Post id </td>
+		<td> Post </td>
+		<td> Author </td>
+	</tr>
+	// This is really stupid, don't do this
+	<?php 
+		  $mysqli = new mysqli("mysql.eecs.ku.edu", "cavalosb", "swkotor22", "cavalosb");
+		  $results = $mysqli->query("SELECT user_id FROM Users");
+		  while($row = $results->fetch_assoc())
+		  {
+		  	$post_id = $row["post_id"];
+			echo "<tr>";
+			echo "<td id='postid' width=50>" .$row["post_id"]. "</td>";
+			echo "<td id='content' width=450>" .$row["content"]. "</td>";
+			echo "<td id='author' width=450>" .$row["author_id"]. "</td>";
+			echo "<input type='checkbox' name='deletecheckbox' value='$post_id'><br>";
+			echo "</tr>";
+		}
+
+	?>
+	</select>
+	<input type="submit">
+	</form>
+</body>
+</html>
